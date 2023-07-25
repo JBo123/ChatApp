@@ -34,7 +34,19 @@ class Model: ObservableObject {
         
     }
     
-    func SaveChatMessageToGroup(text: String, group: Group, completion: @escaping (Error?) -> Void) {
+    func SaveChatMessageToGroup(chatMessage: ChatMessage, group: Group) async throws {
+        
+        let db = Firestore.firestore()
+        guard let groupDocumentId = group.documentId else { return }
+        let _ = try await db.collection("groups")
+            .document(groupDocumentId)
+            .collection("messages")
+            .addDocument(data: chatMessage.toDictionary())
+        
+        
+    }
+    
+    /*func SaveChatMessageToGroup(text: String, group: Group, completion: @escaping (Error?) -> Void) {
         let db = Firestore.firestore()
         guard let groupDocumentId = group.documentId else { return }
         db.collection("groups")
@@ -43,7 +55,8 @@ class Model: ObservableObject {
             .addDocument(data: ["chatText": text]){error in
                 completion(error)
             }
-    }
+    }*/
+    
     
     func saveGroup(group: Group, completion: @escaping (Error?) -> Void) {
         let db = Firestore.firestore()

@@ -11,9 +11,26 @@ struct ChatMessage: Codable, Identifiable, Equatable {
     
     var documentId: String?
     
-    let lext: String
+    let text: String
     let uid: String
-    let dateCreated = Date()
+    var dateCreated = Date()
     let displayName: String
+    
+    var id: String {
+        documentId ?? UUID().uuidString
+    }
+    
+}
+
+extension ChatMessage {
+    
+    func toDictionary() -> [String : Any] {
+        return[
+            "text": text,
+            "uid": uid,
+            "dateCreated": dateCreated,
+            "displayName": displayName,
+        ]
+    }
     
 }
