@@ -8,13 +8,27 @@
 import SwiftUI
 
 struct GroupDetailView: View {
+    
+    let group: Group
+    @EnvironmentObject private var model: Model
+    @State private var chatText: String = ""
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        VStack{
+            Spacer()
+            TextField("Type here...", text: $chatText)
+            Button("Send") {
+                model.SaveChatMessageToGroup(text: chatText, group: group) { error in
+                    
+                }
+            }
+        }.padding()
     }
 }
 
 struct GroupDetailView_Previews: PreviewProvider {
     static var previews: some View {
-        GroupDetailView()
+        GroupDetailView(group: Group(subject: "Moveis"))
+            .environmentObject(Model())
     }
 }

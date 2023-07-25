@@ -1,15 +1,26 @@
 //
 //  MainView.swift
-//  ChatApp
+//  WhatsUp
 //
-//  Created by Jakub Klucký on 05.07.2023.
+//  Created by Mohammad Azam on 3/13/23.
 //
 
 import SwiftUI
 
 struct MainView: View {
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        TabView {
+            GroupListContainerView()
+               
+                .tabItem {
+                    Label("Chats", systemImage: "message.fill")
+                }
+            
+            Text("Settings")
+                .tabItem {
+                    Label("Settings", systemImage: "gear")
+                }
+        }
     }
 }
 

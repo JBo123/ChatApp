@@ -6,3 +6,14 @@
 //
 
 import Foundation
+
+struct ChatMessage: Codable, Identifiable, Equatable {
+    
+    var documentId: String?
+    
+    let lext: String
+    let uid: String
+    let dateCreated = Date()
+    let displayName: String
+    
+}
